@@ -3,7 +3,7 @@
 
 ## use
 ```shell
-pip install omglol
+pip install git+https://github.com/tildezero/omg-py.git
 ```
 
 ```python
