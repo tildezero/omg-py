@@ -1,6 +1,8 @@
 import httpx
 from .constants import API_URL
+from .errors import RequestError
 from httpx import Client
+
 
 class API:
     def __init__(self, key, email):
@@ -18,4 +20,8 @@ class API:
             }
         )
 
-        return req.json()
+        j = req.json()
+        if not j["request"]["success"]:
+            raise RequestError(j['response']['message'])
+        else:
+            return j
