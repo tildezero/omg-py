@@ -3,10 +3,11 @@
 
 ## use
 ```shell
-pip install omg.lol
+pip install omglol
 ```
 
 ```python
 from omg import Client
-Client(key="asdf", email="suhas@omg.lol")
+client = Client(key="asdf", email="suhas@omg.lol")
+client.purl.retrieve("sus")
 ```
