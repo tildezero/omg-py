@@ -1,5 +1,6 @@
 from .api import API
 from .purl import PurlRequestor
+from .pastebin import PasteBinRequestor
 
 
 class Client:
@@ -12,3 +13,7 @@ class Client:
     @property
     def purl(self) -> PurlRequestor:
         return PurlRequestor(self.api, self.default_username)
+
+    @property
+    def pastebin(self) -> PasteBinRequestor:
+        return PasteBinRequestor(self.api, self.default_username)
