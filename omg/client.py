@@ -23,3 +23,7 @@ class Client:
     @property
     def statuslog(self) -> StatuslogRequestor:
         return StatuslogRequestor(self.api, self.default_username)
+
+    @property
+    def service(self) -> ServiceRequestor:
+        return ServiceRequestor(self.api)
