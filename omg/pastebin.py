@@ -23,6 +23,12 @@ class Paste:
             method="DELETE"
         )
 
+    def update(self, new_content: str):
+        self._api.request(
+            path=f"/address/{self.address}/pastebin",
+            body={"title": f"{self.title}", "content": new_content}
+        )
+
 
 class PasteBinRequestor:
     def __init__(self, api: API, default_username) -> None:
@@ -33,14 +39,21 @@ class PasteBinRequestor:
         un = address or self.default_username
         if paste is None:
             raise Exception("please include a paste!")
-        r = self.api.request(f"/address/{un}/pastebin/{paste}")
+        r = self.api.noauth_request(f"/address/{un}/pastebin/{paste}")
         return Paste(**r["response"]["paste"], api=self.api,address=un)
 
-    def retrieve_all(self, address: str=None) -> List[Paste]:
+    def retrieve_all(self, address: Optional[str]=None) -> List[Paste]:
         un = address or self.default_username
         r = self.api.request(f"/address/{un}/pastebin")
         pastes = r['response']['pastebin']
         ls = [Paste(**x, api=self.api,address=un) for x in pastes]
+        return ls
+
+    def retrieve_listed(self, address: Optional[str]=None) -> List[Paste]:
+        un = address or self.default_username
+        r = self.api.noauth_request(f"/address/{un}/pastebin")
+        pastes = r['response']['pastebin']
+        ls = [Paste(**x, api=self.api, address=un) for x in pastes]
         return ls
 
     def create(self, title: str, content: str, listed: bool=True, address: Optional[str]=None) -> Paste:
