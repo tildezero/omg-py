@@ -2,14 +2,18 @@ from .api import API
 from .purl import PurlRequestor
 from .pastebin import PasteBinRequestor
 from .statuslog import StatuslogRequestor
+from .service import ServiceRequestor
+from .address import AddressRequestor
 from typing import Optional
 
 
 class Client:
-    def __init__(self, key: Optional[str]=None, email: Optional[str]=None, default_username=None):
+    def __init__(self, default_username: str, key: Optional[str]=None, email: Optional[str]=None):
+        if not default_username:
+            raise ValueError("you must provide a default username to use! (If you know you will be adding a username to every request, just put some gibberish in/a blank string)")
+        self.default_username = default_username
         self.key = key
         self.email = email
-        self.default_username = default_username
         self.api = API(key=key, email=email)
 
     @property
@@ -27,3 +31,7 @@ class Client:
     @property
     def service(self) -> ServiceRequestor:
         return ServiceRequestor(self.api)
+
+    @property
+    def address(self) -> AddressRequestor:
+        return AddressRequestor(self.api, self.default_username)
