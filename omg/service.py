@@ -12,6 +12,6 @@ class ServiceRequestor:
 		self.api = api
 
 	def info(self) -> dict:
-		r = self.api.noauth_nrequest('/service/info')
+		r = self.api.noauth_request('/service/info')
 		resp = r['response']
 		return ServiceInfo(members=resp['members'], addresses=resp['addresses'], profiles=resp['profiles'])
