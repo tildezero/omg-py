@@ -4,6 +4,8 @@ from .pastebin import PasteBinRequestor
 from .statuslog import StatuslogRequestor
 from .service import ServiceRequestor
 from .address import AddressRequestor
+from .account import Account
+from .dns import DNSRequestor
 from typing import Optional
 
 
@@ -35,3 +37,14 @@ class Client:
     @property
     def address(self) -> AddressRequestor:
         return AddressRequestor(self.api, self.default_username)
+
+    @property
+    def account(self) -> Account:
+        if not self.email:
+            raise Exception("You need an email parameter to use this class!")
+        return Account(self.api, self.email)
+
+    @property
+    def dns(self) -> DNSRequestor:
+        return DNSRequestor(self.api, self.default_username)
+

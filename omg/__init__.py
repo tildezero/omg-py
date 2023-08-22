@@ -11,3 +11,4 @@ from .purl import *
 from .statuslog import *
 from .service import *
 from .address import *
+from .account import *

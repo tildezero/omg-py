@@ -46,14 +46,14 @@ class Account:
 		return self._settings
 
 	@settings.setter
-	def set_settings(self, new_settings: dict) -> dict:
+	def settings(self, value: dict) -> dict:
 		r = self.api.request(
 			f'/account/{self.email}/settings',
 			method='POST',
-			body=new_settings
+			body=value
 		)
-		self._settings = new_settings
-		return new_settings
+		self._settings = value
+		return value
 
 	@property
 	def addresses(self) -> List[Address]:

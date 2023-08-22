@@ -1,4 +1,4 @@
-from api import API
+from .api import API
 from typing import Optional
 from enum import Enum
 from dataclasses import dataclass
@@ -19,7 +19,8 @@ class PublicAddressInfo:
 
 @dataclass
 class PrivateAddressInfo(PublicAddressInfo):
-	expiration: datetime
+	expiration: Optional[datetime]
+	will_expire: bool
 
 @dataclass
 class ExpirationInfo:
@@ -79,5 +80,6 @@ class AddressRequestor:
 			registration_time=datetime.fromtimestamp(float(rsp['registration']['unix_epoch_time'])),
 			verified=rsp['verification']['verified'],
 			expiration=datetime.fromtimestamp(float(rsp['expiration']['unix_epoch_time'])),
-			expired=rsp['expired']
+			expired=rsp['expired'],
+			will_expire=rsp['expiration']['will_expire']
 		)

@@ -1,4 +1,4 @@
-from api import API
+from .api import API
 from dataclasses import dataclass
 
 @dataclass
