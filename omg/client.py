@@ -6,6 +6,8 @@ from .service import ServiceRequestor
 from .address import AddressRequestor
 from .account import Account
 from .dns import DNSRequestor
+from .email import EmailRequestor
+from .now_page import NowPageRequestor
 from typing import Optional
 
 
@@ -47,4 +49,12 @@ class Client:
     @property
     def dns(self) -> DNSRequestor:
         return DNSRequestor(self.api, self.default_username)
+
+    @property
+    def email_forwards(self) -> EmailRequestor:
+        return EmailRequestor(self.api, self.default_username)
+
+    @property
+    def now_pages(self) -> NowPageRequestor:
+        return NowPageRequestor(self.api, self.default_username)
 
