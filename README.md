@@ -24,3 +24,6 @@ client.purl.retrieve("sus")
 - update weblog configuration
 - retrieve weblog template
 - update weblog template
+- upload some.pics picture
+- set description for some.pics picture
+
