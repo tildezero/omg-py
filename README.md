@@ -13,10 +13,6 @@ client.purl.retrieve("sus")
 ```
 
 ## endpoints that need to be implemented
-- retrieve web page content
-- update and publish web page content
-- update webpage content w/o publishing
-- upload a pfp
 - exchange an oauth code for an access token
 - save a preference
 - retrieve weblog entries
@@ -28,3 +24,6 @@ client.purl.retrieve("sus")
 - update weblog configuration
 - retrieve weblog template
 - update weblog template
+- upload some.pics picture
+- set description for some.pics picture
+
