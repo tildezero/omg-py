@@ -12,18 +12,4 @@ client = Client(key="asdf", email="suhas@omg.lol")
 client.purl.retrieve("sus")
 ```
 
-## endpoints that need to be implemented
-- exchange an oauth code for an access token
-- save a preference
-- retrieve weblog entries
-- create a weblog entry
-- retrieve a weblog entry
-- retrieve the latest weblog post
-- delete a weblog entry
-- retrieve weblog configuration
-- update weblog configuration
-- retrieve weblog template
-- update weblog template
-- upload some.pics picture
-- set description for some.pics picture
-
+note: i think every api path is implemented, feel free to create an issue if i'm missing something though
