@@ -12,7 +12,7 @@ class ServiceRequestor:
 	def __init__(self, api: API) -> None:
 		self.api = api
 
-	def info(self) -> dict:
+	def info(self) -> ServiceInfo:
 		r = self.api.noauth_request('/service/info')
 		resp = r['response']
 		return ServiceInfo(members=resp['members'], addresses=resp['addresses'], profiles=resp['profiles'])

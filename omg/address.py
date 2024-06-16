@@ -40,7 +40,7 @@ class AddressRequestor:
 		)
 		return r['response']['available']
 
-	def expiration(self, address: str) -> dict:
+	def expiration(self, address: str) -> ExpirationInfo:
 		un = address or self.default_username
 		r = self.api.noauth_request(
 			f"/address/{un}/expiration"

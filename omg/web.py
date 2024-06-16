@@ -1,11 +1,25 @@
 from .api import API
-from typing import Optional
+from typing import Optional, IO
 from datetime import datetime
-import io
-from urllib.parse import urlencode
+from urllib.parse import quote_plus
+
 
 class WebPage:
-    def __init__(self, address: str, content: str, page_type: str, theme: str, css: str, head: str, verified: int, pfp: str, metadata: str, branding: str, modified: str, api: API):
+    def __init__(
+        self,
+        address: str,
+        content: str,
+        page_type: str,
+        theme: str,
+        css: str,
+        head: str,
+        verified: int,
+        pfp: str,
+        metadata: str,
+        branding: str,
+        modified: str,
+        api: API,
+    ):
         pass
         self._address = address
         self._api = api
@@ -22,9 +36,9 @@ class WebPage:
 
     def update(self, content: str, publish: bool = True) -> None:
         r = self._api.request(
-            f'/address/{self._address}/web',
-            'POST',
-            {"publish": publish, "content": content}
+            f"/address/{self._address}/web",
+            "POST",
+            {"publish": publish, "content": content},
         )
         self.content = content
         self.modified = datetime.now()
@@ -37,19 +51,20 @@ class WebPageRequestor:
 
     def retrieve(self, address: Optional[str] = None) -> WebPage:
         un = address or self.default_username
-        r = self.api.request(
-            f'/address/{un}/web'
+        r = self.api.request(f"/address/{un}/web")
+        pg = r["response"]
+        return WebPage(
+            address=un,
+            **pg,
+            api=self.api
         )
-        pg = r['response']
-        return WebPage(address=un, content=pg['content'], page_type=pg['type'], theme=pg['theme'], css=pg['css'], head=pg['head'], verified=pg['verified'], pfp=pg['pfp'])
 
     # UNTESTED
-    def upload_pfp(self, pfp: io.BufferedIOBase, address: Optional[str] = None) -> None:
+    def upload_pfp(self, pfp: IO, address: Optional[str] = None) -> None:
         un = address or self.default_username
-        with open(pfp, 'rb') as fi:
-            img = urlencode(fi.read())
-            r = self.api.http.post(f'/address/{un}/pfp', headers={"Authorization": f"Bearer {self.api.key}"}, content=img.encode())
-
-
-
-
+        img = quote_plus(pfp.read())
+        r = self.api.http.post(
+            f"/address/{un}/pfp",
+            headers={"Authorization": f"Bearer {self.api.key}"},
+            content=img.encode(),
+        )

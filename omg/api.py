@@ -11,7 +11,7 @@ class API:
         self.key = key
         self.email = email
 
-    def request(self, path, method: Literal["GET", "POST", "PATCH", "DELETE", "PUT"]="GET", body=None):
+    def request(self, path, method: Literal["GET", "POST", "PATCH", "DELETE", "PUT"]="GET", body=None, **kwargs):
         if self.key is None:
             raise Exception("AuthError: You need to add a key in Client() when making this request")
         req = self.http.request(
@@ -20,7 +20,8 @@ class API:
             json=body,
             headers={
                 "Authorization": f"Bearer {self.key}"
-            }
+            },
+            **kwargs
         )
 
         j = req.json()

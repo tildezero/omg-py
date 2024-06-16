@@ -8,6 +8,10 @@ from .account import Account
 from .dns import DNSRequestor
 from .email import EmailRequestor
 from .now_page import NowPageRequestor
+from .misc import Preferences, OAuth
+from .web import WebPageRequestor
+from .weblog import WeblogRequestor
+from .pics import PicsRequestor
 from typing import Optional
 
 
@@ -57,4 +61,24 @@ class Client:
     @property
     def now_pages(self) -> NowPageRequestor:
         return NowPageRequestor(self.api, self.default_username)
+
+    @property
+    def preferences(self) -> Preferences:
+        return Preferences(self.default_username, self.api)
+
+    @property
+    def oauth(self) -> OAuth:
+        return OAuth(self.api)
+
+    @property
+    def web(self) -> WebPageRequestor:
+        return WebPageRequestor(self.api, self.default_username)
+
+    @property
+    def weblog(self) -> WeblogRequestor:
+        return WeblogRequestor(self.api, self.default_username)
+    
+    @property
+    def pics(self) -> PicsRequestor:
+        return PicsRequestor(self.api, self.default_username)
 
