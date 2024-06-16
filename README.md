@@ -3,7 +3,8 @@
 
 ## use
 ```shell
-pip install git+https://github.com/tildezero/omg-py.git
+pip install git+https://github.com/tildezero/omg-py.git # most recent version
+pip install omg.lol # fixed release
 ```
 
 ```python
