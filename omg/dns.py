@@ -25,7 +25,7 @@ class DNSRecord:
             {"type": new_record_type or self.type, "name": new_name or self.name[:-1 * (len(self.address) + 1)], "data": new_data or self.data}
         )
 
-        new_rec = r['response']['response_recieved']['data']
+        new_rec = r['response']['response_received']['data']
 
         self.name = new_rec['name']
         self.data = new_rec['data']
@@ -72,7 +72,7 @@ class DNSRequestor:
             'POST',
             {"type": record_type, "name": name, "data": data}
         )
-        rec = r['response']['response_recieved']['data']
+        rec = r['response']['response_received']['data']
         return DNSRecord(record_id=rec['id'], type=rec['type'], name=rec['name'],
                          data=rec['content'], ttl=rec['ttl'], priority=rec['priority'],
                          created_at=dateutil.parser.isoparse(rec['created_at']),
