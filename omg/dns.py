@@ -28,7 +28,7 @@ class DNSRecord:
         new_rec = r['response']['response_received']['data']
 
         self.name = new_rec['name']
-        self.data = new_rec['data']
+        self.data = new_rec['content']
         self.ttl = new_rec['ttl']
         self.priority = new_rec['priority']
         self.type = new_rec['type']
